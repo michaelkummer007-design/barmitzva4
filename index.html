@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="בר מצווה" />
+  <title>אישור הגעה - בר מצווה</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-hover: #1e3a8a;
+      --primary-light: #dbeafe;
+      --bg-page: #f4efe6;
+      --card-bg: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --border-color: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Heebo', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 40px;
+      transition: background-color 0.3s ease;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 28px;
+      padding: 26px 22px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      transition: all 0.3s ease;
+    }
+
+    .header-card {
+      text-align: center;
+      padding: 30px 22px 24px;
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 8px;
+      line-height: 1.2;
+      transition: color 0.3s ease;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .detail-pill {
+      background: #f9fafb;
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 12px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .detail-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .detail-value {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .action-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .btn-secondary {
+      background: #f3f4f6;
+      color: var(--text-main);
+      border: none;
+      border-radius: 18px;
+      padding: 12px 14px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: transform 0.15s ease, background-color 0.2s ease;
+    }
+
+    .btn-secondary:active {
+      transform: scale(0.97);
+    }
+
+    .schedule-box {
+      background: #f9fafb;
+      border-radius: 20px;
+      padding: 14px 16px;
+      text-align: right;
+      font-size: 0.88rem;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .schedule-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .parking-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      padding-top: 6px;
+      border-top: 1px dashed var(--border-color);
+    }
+
+    .form-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 18px;
+      transition: color 0.3s ease;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .name-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="password"],
+    textarea {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid var(--border-color);
+      border-radius: 18px;
+      font-size: 16px;
+      background: #f9fafb;
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--primary);
+      background: #ffffff;
+    }
+
+    .attendance-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .radio-card {
+      border: 1.5px solid var(--border-color);
+      border-radius: 20px;
+      padding: 14px 10px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      background: #f9fafb;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .radio-card.active {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .counter-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f9fafb;
+      border: 1.5px solid var(--border-color);
+      border-radius: 20px;
+      padding: 8px 14px;
+    }
+
+    .counter-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      border: none;
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 1.4rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.1s ease, background-color 0.2s ease;
+    }
+
+    .counter-btn:active {
+      transform: scale(0.92);
+    }
+
+    .counter-value {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 999px;
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 6px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      transition: transform 0.15s ease, background-color 0.2s ease;
+    }
+
+    .btn-submit:active {
+      transform: scale(0.98);
+    }
+
+    .success-box {
+      display: none;
+      text-align: center;
+      padding: 20px 10px;
+    }
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      font-weight: 800;
+    }
+
+    /* Hidden subtle admin trigger at bottom */
+    .admin-trigger-wrap {
+      margin-top: 28px;
+      text-align: center;
+    }
+
+    .admin-trigger {
+      background: transparent;
+      border: none;
+      color: rgba(107, 114, 128, 0.35);
+      font-size: 0.78rem;
+      padding: 8px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    /* Modals */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 24, 39, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 28px;
+      padding: 24px 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .close-btn {
+      background: #f3f4f6;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .stat-box {
+      background: #f9fafb;
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 12px 6px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .stat-lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .palette-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .color-swatch {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 3px solid #ffffff;
+      box-shadow: 0 0 0 2px #e5e7eb;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .color-swatch.selected {
+      box-shadow: 0 0 0 2.5px #111827;
+      transform: scale(1.1);
+    }
+
+    .guest-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .guest-item {
+      background: #f9fafb;
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .guest-badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .guest-badge.yes {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .guest-badge.no {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .admin-section {
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+      margin-top: 16px;
+    }
+
+    .admin-section h3 {
+      font-size: 1rem;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Event Header Card -->
+    <div class="card header-card">
+      <div class="badge" id="uiBadge">חוגגים בר מצווה</div>
+      <h1 id="uiTitle">אשרו הגעתכם</h1>
+      <p class="subtitle" id="uiSubtitle">נשמח לראותכם חוגגים איתנו ברגע מרגש ומיוחד</p>
+
+      <div class="details-grid">
+        <div class="detail-pill">
+          <span class="detail-label">תאריך</span>
+          <span class="detail-value" id="uiDate">1.4.2027</span>
+        </div>
+        <div class="detail-pill">
+          <span class="detail-label">שעה</span>
+          <span class="detail-value" id="uiTime">9:00</span>
+        </div>
+        <div class="detail-pill">
+          <span class="detail-label">מיקום</span>
+          <span class="detail-value" id="uiLocation">בית כנסת אוהל ארי</span>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <a id="wazeBtn" href="https://waze.com/ul?q=%D7%91%D7%99%D7%AA%20%D7%9B%D7%A0%D7%A1%D7%AA%20%D7%90%D7%95%D7%94%D7%9C%20%D7%90%D7%A8%D7%99" target="_blank" rel="noopener" class="btn-secondary">
+          <span>ניווט ב-Waze</span>
+        </a>
+        <button type="button" id="calendarBtn" class="btn-secondary">
+          <span>הוספה ליומן</span>
+        </button>
+      </div>
+
+      <div class="schedule-box">
+        <div class="schedule-row">
+          <span><strong>לו״ז האירוע:</strong></span>
+          <span id="uiSchedule">09:00 התכנסות והנחת תפילין | 10:30 קידוש</span>
+        </div>
+        <div class="parking-note" id="uiParking">חניה חופשית ברחובות הסמוכים לבית הכנסת</div>
+      </div>
+    </div>
+
+    <!-- RSVP Form Card -->
+    <div class="card" id="rsvpCard">
+      <div id="formContainer">
+        <div class="form-title" id="uiFormTitle">אישור הגעה</div>
+        <form id="rsvpForm">
+          <div class="form-group name-row">
+            <div>
+              <label for="firstName">שם פרטי</label>
+              <input type="text" id="firstName" placeholder="ישראל" required />
+            </div>
+            <div>
+              <label for="lastName">שם משפחה</label>
+              <input type="text" id="lastName" placeholder="ישראלי" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">מספר טלפון (אופציונלי)</label>
+            <input type="tel" id="phone" placeholder="050-0000000" />
+          </div>
+
+          <div class="form-group">
+            <label>מגיעים לשמוח איתנו?</label>
+            <div class="attendance-options">
+              <div class="radio-card active" id="optYes">כן, כמובן!</div>
+              <div class="radio-card" id="optNo">לא, סליחה...</div>
+            </div>
+          </div>
+
+          <div class="form-group" id="guestsCountGroup">
+            <label>מספר מגיעים</label>
+            <div class="counter-box">
+              <button type="button" class="counter-btn" id="minusBtn">-</button>
+              <span class="counter-value" id="guestsCount">1</span>
+              <button type="button" class="counter-btn" id="plusBtn">+</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="greeting">ברכה לחתן בר המצווה</label>
+            <textarea id="greeting" rows="2" placeholder="מזל טוב! מחכים לחגוג איתך..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn">לשלוח</button>
+        </form>
+      </div>
+
+      <div class="success-box" id="successBox">
+        <div class="success-icon">✓</div>
+        <h2 style="color: var(--primary); margin-bottom: 8px;">האישור נשלח בהצלחה!</h2>
+        <p style="color: var(--text-muted); margin-bottom: 18px;">תודה רבה שעדכנתם אותנו, נתראה בשמחות.</p>
+        <button type="button" class="btn-secondary" id="resetFormBtn" style="margin: 0 auto;">שליחת אישור נוסף</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden subtle button -->
+  <div class="admin-trigger-wrap">
+    <button type="button" class="admin-trigger" id="openPinBtn">•••</button>
+  </div>
+
+  <!-- PIN Modal -->
+  <div class="modal-overlay" id="pinModal">
+    <div class="modal-card" style="max-width: 340px; text-align: center;">
+      <div class="modal-header">
+        <strong>כניסת ניהול</strong>
+        <button type="button" class="close-btn" id="closePinBtn">✕</button>
+      </div>
+      <div class="form-group">
+        <input type="password" id="pinInput" inputmode="numeric" maxlength="4" placeholder="הזן קוד גישה" style="text-align: center; letter-spacing: 6px; font-size: 1.3rem;" />
+      </div>
+      <p id="pinError" style="color: #dc2626; font-size: 0.85rem; margin-bottom: 10px; display: none;">קוד שגוי, נסה שוב</p>
+      <button type="button" class="btn-submit" id="verifyPinBtn">כניסה</button>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard Modal -->
+  <div class="modal-overlay" id="adminModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <strong style="font-size: 1.2rem; color: var(--primary);">פאנל ניהול בר מצווה</strong>
+        <button type="button" class="close-btn" id="closeAdminBtn">✕</button>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-num" id="statTotalGuests">0</div>
+          <div class="stat-lbl">סה״כ מגיעים</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="statYesOrders">0</div>
+          <div class="stat-lbl">אישרו הגעה</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="statNoOrders">0</div>
+          <div class="stat-lbl">לא מגיעים</div>
+        </div>
+      </div>
+
+      <div id="notifSection" style="margin-bottom: 16px;">
+        <button type="button" class="btn-secondary" id="enableNotifBtn" style="width: 100%; background: var(--primary-light); color: var(--primary);">
+          הפעלת התראות לטלפון על אישורים חדשים
+        </button>
+      </div>
+
+      <div class="admin-section">
+        <h3>פלטת צבעים לאתר</h3>
+        <div class="palette-row" id="paletteRow"></div>
+      </div>
+
+      <div class="admin-section">
+        <h3>עריכת טקסטים ופרטים (נשמר לתמיד)</h3>
+        <div class="form-group">
+          <label>כותרת ראשית</label>
+          <input type="text" id="editTitle" />
+        </div>
+        <div class="form-group">
+          <label>תת כותרת</label>
+          <input type="text" id="editSubtitle" />
+        </div>
+        <div class="form-group name-row">
+          <div>
+            <label>תאריך</label>
+            <input type="text" id="editDate" />
+          </div>
+          <div>
+            <label>שעה</label>
+            <input type="text" id="editTime" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>מיקום</label>
+          <input type="text" id="editLocation" />
+        </div>
+        <div class="form-group">
+          <label>לו״ז האירוע</label>
+          <input type="text" id="editSchedule" />
+        </div>
+        <div class="form-group">
+          <label>הערת חניה</label>
+          <input type="text" id="editParking" />
+        </div>
+        <button type="button" class="btn-submit" id="saveSettingsBtn">שמור שינויים</button>
+        <p id="saveToast" style="text-align: center; color: #16a34a; font-weight: 700; margin-top: 8px; display: none;">השינויים נשמרו בהצלחה!</p>
+      </div>
+
+      <div class="admin-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <h3 style="margin: 0;">רשימת אישורים</h3>
+          <button type="button" id="clearGuestsBtn" style="background: none; border: none; color: #dc2626; font-size: 0.8rem; cursor: pointer;">איפוס רשימה</button>
+        </div>
+        <div class="guest-list" id="guestList"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Color Themes
+    const THEMES = [
+      { id: 'blue', primary: '#1e40af', hover: '#1e3a8a', light: '#dbeafe', bg: '#f4efe6' },
+      { id: 'emerald', primary: '#047857', hover: '#065f46', light: '#d1fae5', bg: '#f0fdf4' },
+      { id: 'gold', primary: '#b45309', hover: '#92400e', light: '#fef3c7', bg: '#faf6f0' },
+      { id: 'purple', primary: '#6d28d9', hover: '#5b21b6', light: '#ede9fe', bg: '#f5f3ff' },
+      { id: 'rose', primary: '#be123c', hover: '#9f1239', light: '#ffe4e6', bg: '#fff1f2' },
+      { id: 'slate', primary: '#0f172a', hover: '#020617', light: '#e2e8f0', bg: '#f8fafc' }
+    ];
+
+    const DEFAULT_SETTINGS = {
+      themeId: 'blue',
+      title: 'אשרו הגעתכם',
+      subtitle: 'נשמח לראותכם חוגגים איתנו ברגע מרגש ומיוחד',
+      date: '1.4.2027',
+      time: '9:00',
+      location: 'בית כנסת אוהל ארי',
+      schedule: '09:00 התכנסות והנחת תפילין | 10:30 קידוש',
+      parking: 'חניה חופשית ברחובות הסמוכים לבית הכנסת'
+    };
+
+    // Cloud Sync via lightweight public JSON store + LocalStorage backup
+    const STORAGE_KEY_SETTINGS = 'bm_site_settings_v3';
+    const STORAGE_KEY_GUESTS = 'bm_site_guests_v3';
+    const CLOUD_API = 'https://kvdb.io/A9xK7mP2qR8vL4nW6zT1yB/barmitzva2812';
+
+    let state = {
+      settings: { ...DEFAULT_SETTINGS },
+      guests: []
+    };
+
+    let isAttending = true;
+    let guestCount = 1;
+    let knownGuestCount = 0;
+
+    function loadLocal() {
+      try {
+        const s = localStorage.getItem(STORAGE_KEY_SETTINGS);
+        if (s) state.settings = { ...DEFAULT_SETTINGS, ...JSON.parse(s) };
+        const g = localStorage.getItem(STORAGE_KEY_GUESTS);
+        if (g) state.guests = JSON.parse(g);
+      } catch (e) {}
+    }
+
+    function saveLocal() {
+      try {
+        localStorage.setItem(STORAGE_KEY_SETTINGS, JSON.stringify(state.settings));
+        localStorage.setItem(STORAGE_KEY_GUESTS, JSON.stringify(state.guests));
+      } catch (e) {}
+    }
+
+    async function syncFromCloud() {
+      try {
+        const res = await fetch(CLOUD_API + '?t=' + Date.now());
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.settings) {
+            state.settings = { ...DEFAULT_SETTINGS, ...data.settings };
+          }
+          if (data && Array.isArray(data.guests)) {
+            if (knownGuestCount > 0 && data.guests.length > knownGuestCount) {
+              const newest = data.guests[0];
+              triggerPhoneNotification(newest);
+            }
+            state.guests = data.guests;
+            knownGuestCount = state.guests.length;
+          }
+          saveLocal();
+          applySettingsToUI();
+          renderAdminData();
+        }
+      } catch (e) {
+        // Fallback silently to local state
+      }
+    }
+
+    async function pushToCloud() {
+      saveLocal();
+      try {
+        await fetch(CLOUD_API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(state)
+        });
+      } catch (e) {}
+    }
+
+    function applyTheme(themeId) {
+      const theme = THEMES.find(t => t.id === themeId) || THEMES[0];
+      const root = document.documentElement;
+      root.style.setProperty('--primary', theme.primary);
+      root.style.setProperty('--primary-hover', theme.hover);
+      root.style.setProperty('--primary-light', theme.light);
+      root.style.setProperty('--bg-page', theme.bg);
+    }
+
+    function applySettingsToUI() {
+      const s = state.settings;
+      applyTheme(s.themeId);
+      document.getElementById('uiTitle').textContent = s.title;
+      document.getElementById('uiSubtitle').textContent = s.subtitle;
+      document.getElementById('uiDate').textContent = s.date;
+      document.getElementById('uiTime').textContent = s.time;
+      document.getElementById('uiLocation').textContent = s.location;
+      document.getElementById('uiSchedule').textContent = s.schedule;
+      document.getElementById('uiParking').textContent = s.parking;
+
+      document.getElementById('wazeBtn').href =
+        'https://waze.com/ul?q=' + encodeURIComponent(s.location);
+
+      // Populate admin inputs
+      document.getElementById('editTitle').value = s.title;
+      document.getElementById('editSubtitle').value = s.subtitle;
+      document.getElementById('editDate').value = s.date;
+      document.getElementById('editTime').value = s.time;
+      document.getElementById('editLocation').value = s.location;
+      document.getElementById('editSchedule').value = s.schedule;
+      document.getElementById('editParking').value = s.parking;
+
+      renderPalette();
+    }
+
+    function renderPalette() {
+      const row = document.getElementById('paletteRow');
+      row.innerHTML = '';
+      THEMES.forEach(t => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'color-swatch' + (state.settings.themeId === t.id ? ' selected' : '');
+        btn.style.backgroundColor = t.primary;
+        btn.addEventListener('click', async () => {
+          state.settings.themeId = t.id;
+          applySettingsToUI();
+          await pushToCloud();
+        });
+        row.appendChild(btn);
+      });
+    }
+
+    function renderAdminData() {
+      let totalGuests = 0;
+      let yesOrders = 0;
+      let noOrders = 0;
+
+      state.guests.forEach(g => {
+        if (g.attending) {
+          yesOrders++;
+          totalGuests += Number(g.count || 1);
+        } else {
+          noOrders++;
+        }
+      });
+
+      document.getElementById('statTotalGuests').textContent = totalGuests;
+      document.getElementById('statYesOrders').textContent = yesOrders;
+      document.getElementById('statNoOrders').textContent = noOrders;
+
+      const list = document.getElementById('guestList');
+      if (state.guests.length === 0) {
+        list.innerHTML = '<p style="text-align:center; color:#6b7280; font-size:0.9rem;">עדיין אין אישורי הגעה</p>';
+        return;
+      }
+
+      list.innerHTML = '';
+      state.guests.forEach(g => {
+        const item = document.createElement('div');
+        item.className = 'guest-item';
+        const fullName = `${g.firstName} ${g.lastName}`;
+        const badgeHtml = g.attending
+          ? `<span class="guest-badge yes">מגיעים (${g.count})</span>`
+          : `<span class="guest-badge no">לא מגיעים</span>`;
+
+        item.innerHTML = `
+          <div>
+            <strong>${escapeHtml(fullName)}</strong>
+            ${g.phone ? `<div style="font-size:0.8rem; color:#6b7280;">${escapeHtml(g.phone)}</div>` : ''}
+            ${g.greeting ? `<div style="font-size:0.82rem; color:#374151; margin-top:4px;">"${escapeHtml(g.greeting)}"</div>` : ''}
+          </div>
+          ${badgeHtml}
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // Attendance toggle
+    const optYes = document.getElementById('optYes');
+    const optNo = document.getElementById('optNo');
+    const guestsCountGroup = document.getElementById('guestsCountGroup');
+
+    optYes.addEventListener('click', () => {
+      isAttending = true;
+      optYes.classList.add('active');
+      optNo.classList.remove('active');
+      guestsCountGroup.style.display = 'block';
+    });
+
+    optNo.addEventListener('click', () => {
+      isAttending = false;
+      optNo.classList.add('active');
+      optYes.classList.remove('active');
+      guestsCountGroup.style.display = 'none';
+    });
+
+    // Counter buttons
+    document.getElementById('minusBtn').addEventListener('click', () => {
+      if (guestCount > 1) {
+        guestCount--;
+        document.getElementById('guestsCount').textContent = guestCount;
+      }
+    });
+
+    document.getElementById('plusBtn').addEventListener('click', () => {
+      if (guestCount < 20) {
+        guestCount++;
+        document.getElementById('guestsCount').textContent = guestCount;
+      }
+    });
+
+    // Add to Calendar (.ics download)
+    document.getElementById('calendarBtn').addEventListener('click', () => {
+      const title = 'בר מצווה - ' + state.settings.location;
+      const loc = state.settings.location;
+      const ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'BEGIN:VEVENT',
+        'DTSTART:20270401T090000',
+        'DTEND:20270401T120000',
+        'SUMMARY:' + title,
+        'LOCATION:' + loc,
+        'DESCRIPTION:' + state.settings.schedule,
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'bar-mitzvah.ics';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+
+    // Form Submission
+    document.getElementById('rsvpForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'שולח...';
+
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName = document.getElementById('lastName').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const greeting = document.getElementById('greeting').value.trim();
+
+      // Pull latest first so we don't overwrite other guests
+      await syncFromCloud();
+
+      const newEntry = {
+        id: Date.now(),
+        firstName,
+        lastName,
+        phone,
+        attending: isAttending,
+        count: isAttending ? guestCount : 0,
+        greeting,
+        createdAt: new Date().toISOString()
+      };
+
+      state.guests.unshift(newEntry);
+      knownGuestCount = state.guests.length;
+      await pushToCloud();
+      renderAdminData();
+
+      document.getElementById('formContainer').style.display = 'none';
+      document.getElementById('successBox').style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'לשלוח';
+    });
+
+    document.getElementById('resetFormBtn').addEventListener('click', () => {
+      document.getElementById('rsvpForm').reset();
+      isAttending = true;
+      guestCount = 1;
+      optYes.classList.add('active');
+      optNo.classList.remove('active');
+      guestsCountGroup.style.display = 'block';
+      document.getElementById('guestsCount').textContent = '1';
+      document.getElementById('successBox').style.display = 'none';
+      document.getElementById('formContainer').style.display = 'block';
+    });
+
+    // Admin PIN Logic
+    const pinModal = document.getElementById('pinModal');
+    const adminModal = document.getElementById('adminModal');
+    const pinInput = document.getElementById('pinInput');
+    const pinError = document.getElementById('pinError');
+
+    document.getElementById('openPinBtn').addEventListener('click', () => {
+      pinInput.value = '';
+      pinError.style.display = 'none';
+      pinModal.classList.add('open');
+      setTimeout(() => pinInput.focus(), 100);
+    });
+
+    document.getElementById('closePinBtn').addEventListener('click', () => {
+      pinModal.classList.remove('open');
+    });
+
+    function checkPin() {
+      if (pinInput.value === '2812') {
+        pinModal.classList.remove('open');
+        adminModal.classList.add('open');
+        syncFromCloud();
+        checkNotificationSupport();
+      } else {
+        pinError.style.display = 'block';
+        pinInput.value = '';
+      }
+    }
+
+    document.getElementById('verifyPinBtn').addEventListener('click', checkPin);
+    pinInput.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter' || pinInput.value.length === 4) {
+        checkPin();
+      }
+    });
+
+    document.getElementById('closeAdminBtn').addEventListener('click', () => {
+      adminModal.classList.remove('open');
+    });
+
+    // Save Admin Text Settings
+    document.getElementById('saveSettingsBtn').addEventListener('click', async () => {
+      state.settings.title = document.getElementById('editTitle').value.trim() || DEFAULT_SETTINGS.title;
+      state.settings.subtitle = document.getElementById('editSubtitle').value.trim();
+      state.settings.date = document.getElementById('editDate').value.trim() || DEFAULT_SETTINGS.date;
+      state.settings.time = document.getElementById('editTime').value.trim() || DEFAULT_SETTINGS.time;
+      state.settings.location = document.getElementById('editLocation').value.trim() || DEFAULT_SETTINGS.location;
+      state.settings.schedule = document.getElementById('editSchedule').value.trim();
+      state.settings.parking = document.getElementById('editParking').value.trim();
+
+      applySettingsToUI();
+      await pushToCloud();
+
+      const toast = document.getElementById('saveToast');
+      toast.style.display = 'block';
+      setTimeout(() => { toast.style.display = 'none'; }, 2500);
+    });
+
+    // Clear guest list
+    document.getElementById('clearGuestsBtn').addEventListener('click', async () => {
+      if (confirm('למחוק את כל רשימת אישורי ההגעה?')) {
+        state.guests = [];
+        knownGuestCount = 0;
+        await pushToCloud();
+        renderAdminData();
+      }
+    });
+
+    // Phone Notifications (Mobile / Home Screen App)
+    function checkNotificationSupport() {
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      const notifSection = document.getElementById('notifSection');
+      const btn = document.getElementById('enableNotifBtn');
+
+      if (!isMobile || !('Notification' in window)) {
+        notifSection.style.display = 'none';
+        return;
+      }
+
+      notifSection.style.display = 'block';
+      if (Notification.permission === 'granted') {
+        btn.textContent = '✓ התראות לטלפון פעילות';
+      }
+    }
+
+    document.getElementById('enableNotifBtn').addEventListener('click', async () => {
+      if (!('Notification' in window)) return;
+      const perm = await Notification.requestPermission();
+      if (perm === 'granted') {
+        document.getElementById('enableNotifBtn').textContent = '✓ התראות לטלפון פעילות';
+        new Notification('בר מצווה - התראות פעילות', {
+          body: 'תקבל עדכון בכל פעם שאורח חדש יאשר הגעה!'
+        });
+      }
+    });
+
+    function triggerPhoneNotification(guest) {
+      if ('Notification' in window && Notification.permission === 'granted' && guest) {
+        const status = guest.attending ? `מגיעים (${guest.count})` : 'לא מגיעים';
+        new Notification('אישור הגעה חדש!', {
+          body: `${guest.firstName} ${guest.lastName} - ${status}`
+        });
+      }
+    }
+
+    // Initialize
+    loadLocal();
+    knownGuestCount = state.guests.length;
+    applySettingsToUI();
+    renderAdminData();
+    syncFromCloud();
+
+    // Poll every 12 seconds for live updates & phone notifications
+    setInterval(syncFromCloud, 12000);
+  </script>
+</body>
+</html>
